@@ -20,6 +20,10 @@ int main(int argc, char const *argv[])
 	sterling(n, k, sterling_res);
 	gmp_printf("Sterling(n=%" PRIu32 ", k=%" PRIu32 ")=%Zd\n", n, k, sterling_res);
 	mpz_clear(sterling_res);
+	while(terminal_kbhit()!=1)
+	{
+		asm("nop\n");
+	}
 }
 
 void sterling(uint32_t n, uint32_t k, mpz_t res)
