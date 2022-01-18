@@ -9,12 +9,6 @@ void stirling_recursion(uint32_t n, uint32_t k, mpz_t res);
 void stirling_iterative(uint32_t n, uint32_t k, mpz_t res);
 int main(int argc, char const *argv[])
 {
-
-	/*FILE *f = fopen("numHex.txt", "w");
-	mpz_t x;
-	mpz_init_set_ui(x, 0);
-	mpz_fac_ui(x, 20000000);
-	gmp_fprintf(f, "%Zx\n", x);*/
 	uint32_t n = 0;
 	uint32_t k = 0;
 	mpz_t sterling_res;
