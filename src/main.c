@@ -1,17 +1,22 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <gmp.h>
 #include <stdint.h>
 #include <inttypes.h>
 #include <string.h>
 #include "include/terminal.h"
 
+static mpz_t sterling_res;
+
 void stirling_recursion(uint32_t n, uint32_t k, mpz_t res);
 void stirling_iterative(uint32_t n, uint32_t k, mpz_t res);
+void cleanup(void);
+
 int main(int argc, char const *argv[])
 {
 	uint32_t n = 0;
 	uint32_t k = 0;
-	mpz_t sterling_res;
+	atexit(cleanup);
 	mpz_init_set_si(sterling_res, 0);
 	terminal_clear();
 	printf("n: ");
@@ -153,4 +158,9 @@ void stirling_recursion(uint32_t n, uint32_t k, mpz_t res)
 	mpz_mul_ui(tmp, tmp, k);
 	mpz_add(res, res, tmp);
 	mpz_clear(tmp);
+}
+
+void cleanup(void)
+{
+	mpz_clear(sterling_res);
 }
