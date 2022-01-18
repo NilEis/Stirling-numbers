@@ -48,7 +48,6 @@ void stirling_iterative(uint32_t n, uint32_t k, mpz_t res)
 	mpz_init(tmp_neg);
 	mpz_init(po);
 	mpz_init(tmp_po);
-	uint32_t p = k / (terminal_get_width() - 1);
 	for (unsigned long i = 0; i <= k; i++)
 	{
 		mpz_set_si(loop_res, 0);
@@ -64,10 +63,6 @@ void stirling_iterative(uint32_t n, uint32_t k, mpz_t res)
 		mpz_pow_ui(po, tmp_po, n);
 		mpz_mul(tmp_loop_res, neg, bin);
 		mpz_mul(loop_res, tmp_loop_res, po);
-		if (!(i % p))
-		{
-			printf("#");
-		}
 	}
 	mpz_fdiv_q(res, loop_res, loop_res_div);
 
