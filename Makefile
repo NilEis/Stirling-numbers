@@ -4,8 +4,8 @@ SRCS = $(wildcard $(SRC)/*.c)
 OBJ = obj
 OBJS = $(patsubst $(SRC)/%.c, $(OBJ)/%.o, $(SRCS))
 DFLAGS = -g3 -Wall
-FLAGS = -Ofast -Wall
-LFLAGS = -lm -static -lgmp -s
+FLAGS = -Ofast -Wall -s
+LFLAGS = -lm -static -lgmp 
 BINDIR = bin
 BIN = $(BINDIR)/sterling
 
@@ -31,7 +31,7 @@ $(BIN): $(OBJS)
 $(OBJ)/%.o: $(SRC)/%.c
 	$(CC) $(FLAGS) -c $< -o $@
 
-.PHONY : clean
+.PHONY : clean run
 
 ifeq ($(OS),Windows_NT)
 OBJS := $(subst /,\, $(OBJS))
@@ -39,3 +39,6 @@ BIN := $(subst /,\, $(BIN))
 endif
 clean:
 	$(RM) $(BIN).* $(OBJS)
+
+run: all
+	$(BIN)
