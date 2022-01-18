@@ -21,7 +21,7 @@ int main(int argc, char const *argv[])
 	scanf("%" SCNu32, &k);
 	printf("n=%" PRIu32 ", k=%" PRIu32 "\n", n, k);
 	stirling_iterative(n, k, sterling_res);
-	gmp_printf("Sterling(n=%" PRIu32 ", k=%" PRIu32 ")=%Zd\n\n\n%Zx\n", n, k, sterling_res, sterling_res);
+	gmp_printf("Sterling(n=%" PRIu32 ", k=%" PRIu32 ")=%Zd\n", n, k, sterling_res, sterling_res);
 	mpz_clear(sterling_res);
 	while (terminal_kbhit() != 1)
 	{
@@ -64,8 +64,14 @@ void stirling_iterative(uint32_t n, uint32_t k, mpz_t res)
 		mpz_mul(tmp_loop_res, neg, bin);
 		mpz_mul(loop_res, tmp_loop_res, po);
 	}
-	mpz_fdiv_q(res, loop_res, loop_res_div);
-
+	if (mpz_divisible_p(loop_res, loop_res_div))
+	{
+		mpz_divexact(res, loop_res, loop_res_div);
+	}
+	else
+	{
+		mpz_fdiv_q(res, loop_res, loop_res_div);
+	}
 	mpz_clear(loop_res_div);
 	mpz_clear(loop_res);
 	mpz_clear(tmp_loop_res);
