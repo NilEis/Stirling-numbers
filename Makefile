@@ -7,7 +7,7 @@ DFLAGS = -g3 -Wall
 FLAGS = -Ofast -Wall -s
 LFLAGS = -lm -static -lgmp 
 BINDIR = bin
-BIN = $(BINDIR)/sterling
+BIN = $(BINDIR)/stirling
 
 ifeq ($(OS),Windows_NT)
 RM = del /Q /F
