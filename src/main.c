@@ -6,7 +6,7 @@
 #include <string.h>
 #include "include/terminal.h"
 
-static mpz_t sterling_res;
+static mpz_t stirling_res;
 
 void stirling_recursion(uint32_t n, uint32_t k, mpz_t res);
 void stirling_iterative(uint32_t n, uint32_t k, mpz_t res);
@@ -17,7 +17,7 @@ int main(int argc, char const *argv[])
 	uint32_t n = 0;
 	uint32_t k = 0;
 	atexit(cleanup);
-	mpz_init_set_si(sterling_res, 0);
+	mpz_init_set_si(stirling_res, 0);
 	terminal_clear();
 	printf("n: ");
 	scanf("%" SCNu32, &n);
@@ -25,9 +25,9 @@ int main(int argc, char const *argv[])
 	printf("k: ");
 	scanf("%" SCNu32, &k);
 	printf("n=%" PRIu32 ", k=%" PRIu32 "\n", n, k);
-	stirling_iterative(n, k, sterling_res);
-	gmp_printf("Sterling(n=%" PRIu32 ", k=%" PRIu32 ")=%Zd\n", n, k, sterling_res, sterling_res);
-	mpz_clear(sterling_res);
+	stirling_iterative(n, k, stirling_res);
+	gmp_printf("Stirling(n=%" PRIu32 ", k=%" PRIu32 ")=%Zd\n", n, k, stirling_res, stirling_res);
+	mpz_clear(stirling_res);
 	while (terminal_kbhit() != 1)
 	{
 		asm("nop\n");
@@ -162,5 +162,5 @@ void stirling_recursion(uint32_t n, uint32_t k, mpz_t res)
 
 void cleanup(void)
 {
-	mpz_clear(sterling_res);
+	mpz_clear(stirling_res);
 }
